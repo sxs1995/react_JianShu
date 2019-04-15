@@ -70,7 +70,7 @@ export const NavItem = styled.div `
     color:#ea6f5a;
   }
 `
-
+// eslint-disable-next-line
 export const NavSearch = styled.input.attrs({
   placeholder: '搜索'
 })
@@ -92,7 +92,7 @@ export const NavSearch = styled.input.attrs({
     color: #999;
   }
   &.focused{
-    width:200px;
+    width:240px;
   }
 `
 
