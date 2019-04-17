@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { CSSTransition } from "react-transition-group";
 import {
   HeaderWrapper,
@@ -12,71 +13,79 @@ import {
   Btn,
   Icon
 } from "./style";
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      focused: false
-    };
-  }
 
-  hanldeInputFocus = () => {
-    this.setState({ focused: true });
-  };
-  hanldeInputBlur = () => {
-    this.setState({ focused: false });
-  };
-
-  render() {
-    return (
-      <HeaderWrapper>
-        <WidthLimit>
-          <Logo href="" />
-          <Nav>
-            <NavItem className="left active">
-              <Icon className="iconfont icon-zhinan" />
-              首页
+const Header = (props) => {
+  return (
+    <HeaderWrapper>
+      <WidthLimit>
+        <Logo href="" />
+        <Nav>
+          <NavItem className="left active">
+            <Icon className="iconfont icon-zhinan" />
+            首页
             </NavItem>
-            <NavItem className="left">
-              <Icon className="iconfont icon-shoujixiazai" />
-              下载App
+          <NavItem className="left">
+            <Icon className="iconfont icon-shoujixiazai" />
+            下载App
             </NavItem>
-            <NavItem className="right">登录</NavItem>
-            <NavItem className="right language">
-              <Icon className="iconfont icon-Aa" />
-            </NavItem>
-            <SearchWrapper>
-              <CSSTransition
-                in={this.state.focused}
-                timeout={1000}
-                classNames="slide"
-              >
-                <NavSearch
-                  className={this.state.focused ? "focused" : ""}
-                  onFocus={this.hanldeInputFocus}
-                  onBlur={this.hanldeInputBlur}
-                />
-              </CSSTransition>
-              <Icon
-                className={
-                  this.state.focused
-                    ? "iconfont icon-fangdajing icon-fangdajing2"
-                    : "iconfont icon-fangdajing "
-                }
+          <NavItem className="right">登录</NavItem>
+          <NavItem className="right language">
+            <Icon className="iconfont icon-Aa" />
+          </NavItem>
+          <SearchWrapper>
+            <CSSTransition
+              in={props.focuse}
+              timeout={1000}
+              classNames="slide"
+            >
+              <NavSearch
+                className={props.focuse ? "focused" : ""}
+                onFocus={props.hanldeInputFocus}
+                onBlur={props.hanldeInputBlur}
               />
-            </SearchWrapper>
-          </Nav>
-          <Addtion>
-            <Btn className="writting">
-              <Icon className="iconfont icon-yumaobi" />
-              写文章
+            </CSSTransition>
+            <Icon
+              className={
+                props.focuse
+                  ? "iconfont icon-fangdajing icon-fangdajing2"
+                  : "iconfont icon-fangdajing "
+              }
+            />
+          </SearchWrapper>
+        </Nav>
+        <Addtion>
+          <Btn className="writting">
+            <Icon className="iconfont icon-yumaobi" />
+            写文章
             </Btn>
-            <Btn className="reg">注册</Btn>
-          </Addtion>
-        </WidthLimit>
-      </HeaderWrapper>
-    );
-  }
+          <Btn className="reg">注册</Btn>
+        </Addtion>
+      </WidthLimit>
+    </HeaderWrapper>
+  );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    focuse: state.focused
+  };
+};
+
+const mapDispathToProps = (dispatch) => {
+  return {
+    hanldeInputFocus: () => {
+      const action = {
+        type: 'SEARCH_FOUCS'
+      }
+      dispatch(action)
+    },
+    hanldeInputBlur: () => {
+      const action = {
+        type: 'SEARCH_BLUR'
+      }
+      dispatch(action)
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispathToProps)(Header);
