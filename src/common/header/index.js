@@ -68,7 +68,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    focuse: state.focused
+    focuse: state.header.focused
   };
 };
 
