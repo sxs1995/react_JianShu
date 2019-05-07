@@ -1,16 +1,27 @@
-const defaultState = {
-    focused: false
-};
+import * as actionTypes from "./actionTypes";
+import { fromJS } from "immutable";
+// immutable 库  对象
+const defaultState = fromJS({
+  focused: false,
+  mouseIn: false,
+  list: [],
+  page: 1,
+  totalPage: 1
+});
 
 export default (state = defaultState, action) => {
-    if (action.type === 'SEARCH_FOUCS') {
-        return {
-            focused: true
-        };
-    } else if (action.type === 'SEARCH_BLUR') {
-        return {
-            focused: false
-        };
-    } 
-    return state;
-}
+  switch (action.type) {
+    case actionTypes.SEARCH_FOUCS:
+      return state.set("focused", true);
+    case actionTypes.SEARCH_BLUR:
+      return state.set("focused", false);
+    case actionTypes.CHANGE_LIST:
+      return state.set("list", action.data).set("totalPage", action.totalPage);
+    case actionTypes.MOUSE_ENTER:
+      return state.set("mouseIn", true);
+    case actionTypes.MOUSE_LEAVE:
+      return state.set("mouseIn", false);
+    default:
+      return state;
+  }
+};

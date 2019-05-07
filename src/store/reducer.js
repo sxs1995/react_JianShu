@@ -1,6 +1,6 @@
 
-import { combineReducers } from 'redux';
-import HeaderReducer from '../common/header/store/reducer';
+import { combineReducers } from 'redux-immutable';
+import { reducer as HeaderReducer} from '../common/header/store';
 export default combineReducers({
     header: HeaderReducer
 })
