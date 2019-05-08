@@ -26,17 +26,23 @@ class Header extends React.Component {
       focuse,
       list,
       page,
+      totalPage,
+      mouseIn,
       handleMouseEnter,
+      handleChangePage,
       handleMouseLeave
     } = this.props;
     const newList = list.toJS();
     const pageList = [];
-    for (let i = (page - 1) * 10; i < page * 10; i++) {
-      pageList.push(
-        <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
-      );
+    if (newList.length) {
+      for (let i = (page - 1) * 10; i < page * 10; i++) {
+        pageList.push(
+          <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+        );
+      }
     }
-    if (focuse) {
+
+    if (focuse || mouseIn) {
       return (
         <SearchInfo
           onMouseEnter={handleMouseEnter}
@@ -44,7 +50,17 @@ class Header extends React.Component {
         >
           <SearchInfotitle>
             热门搜索
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch
+              onClick={() => handleChangePage(page, totalPage, this.spinIcon)}
+            >
+              <i
+                className="iconfont icon-shuaxin"
+                ref={(icon) => {
+                  this.spinIcon = icon;
+                }}
+              />
+              换一批
+            </SearchInfoSwitch>
           </SearchInfotitle>
           <SearchInfoList>{pageList}</SearchInfoList>
         </SearchInfo>
@@ -55,7 +71,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { focuse, hanldeInputFocus, hanldeInputBlur } = this.props;
+    const { focuse, hanldeInputFocus, hanldeInputBlur, list } = this.props;
     return (
       <HeaderWrapper>
         <WidthLimit>
@@ -77,7 +93,7 @@ class Header extends React.Component {
               <CSSTransition in={focuse} timeout={1000} classNames="slide">
                 <NavSearch
                   className={focuse ? "focused" : ""}
-                  onFocus={hanldeInputFocus}
+                  onFocus={() => hanldeInputFocus(list)}
                   onBlur={hanldeInputBlur}
                 />
               </CSSTransition>
@@ -105,18 +121,20 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     focuse: state.getIn(["header", "focused"]),
     list: state.getIn(["header", "list"]),
-    page: state.getIn(["header", "page"])
+    page: state.getIn(["header", "page"]),
+    totalPage: state.getIn(["header", "totalPage"]),
+    mouseIn: state.getIn(["header", "mouseIn"])
   };
 };
 
 const mapDispathToProps = (dispatch) => {
   return {
-    hanldeInputFocus: () => {
-      dispatch(actionCreators.getList());
+    hanldeInputFocus: (list) => {
+      console.log(list);
+      list.size === 0 && dispatch(actionCreators.getList());
       dispatch(actionCreators.searchFocus());
     },
     hanldeInputBlur: () => {
@@ -127,6 +145,20 @@ const mapDispathToProps = (dispatch) => {
     },
     handleMouseLeave: () => {
       dispatch(actionCreators.mouseLeave());
+    },
+    handleChangePage: (page, totalPage, spinIcon) => {
+      let originAngle = spinIcon.style.transform.replace(/[^0-9]/gi, "");
+      if (originAngle) {
+        originAngle = parseInt(originAngle, 10);
+      } else {
+        originAngle = 0;
+      }
+      spinIcon.style.transform = "rotate(" + (originAngle + 360) + "deg)";
+      if (page < totalPage) {
+        dispatch(actionCreators.changePage(page + 1));
+      } else {
+        dispatch(actionCreators.changePage(1));
+      }
     }
   };
 };

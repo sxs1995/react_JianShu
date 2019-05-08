@@ -156,31 +156,39 @@ export const SearchInfo = styled.div`
   height: auto;
   width: 250px;
   border-radius: 4px;
-  box-shadow: 0 0 8px rgba(0,0,0,.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 `;
 
 export const SearchInfotitle = styled.div`
-  margin-top:20px;
-  margin-bottom:15px;
-  line-height:20px;
-  font-size:14px;
-  color:#969696;
-`
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #969696;
+  .icon-shuaxin {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 2px;
+    transition: all 0.2s ease-in;
+    transform-origin: center center;
+  }
+`;
 export const SearchInfoList = styled.div`
-  overflow:hidden;
-`
+  overflow: hidden;
+`;
 export const SearchInfoSwitch = styled.span`
-  float:right;
-  font-size:13px;
-`
+  float: right;
+  font-size: 13px;
+  cursor: pointer;
+`;
 export const SearchInfoItem = styled.a`
-  display:block;
-  float:left;
-  font-size:12px;
-  padding:0 5px;
-  margin:0 14px 10px 0;
-  line-height:20px;
-  border:1px solid #969696;
-  border-radius:3px;
-  color:#787878;
-`
+  display: block;
+  float: left;
+  font-size: 12px;
+  padding: 0 5px;
+  margin: 0 14px 10px 0;
+  line-height: 20px;
+  border: 1px solid #969696;
+  border-radius: 3px;
+  color: #787878;
+`;
