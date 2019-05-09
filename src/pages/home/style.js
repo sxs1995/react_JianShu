@@ -20,8 +20,6 @@ export const HomeLeft = styled.div`
 export const HomeRight = styled.div`
   width: 280px;
   float: right;
-  height: 200px;
-  background: green;
 `;
 
 export const TopicWrapper = styled.div`
@@ -32,24 +30,24 @@ export const TopicWrapper = styled.div`
 `;
 
 export const TopicItem = styled.div`
-	float: left;
-	height: 32px;
-	line-height: 32px;
-	margin-left: 18px;
-	margin-bottom: 18px;
-	padding-right: 10px
-	background: #f7f7f7;
-	font-size: 14px;
-	color: #000;
-	border: 1px solid #dcdcdc;
-	border-radius: 4px;
-	.topic-pic {
-		display: block;
-		float: left;
-		width: 32px;
-		height: 32px;
-		margin-right: 10px;
-	}
+  float: left;
+  height: 32px;
+  line-height: 32px;
+  margin-left: 18px;
+  margin-bottom: 18px;
+  padding-right: 10px;
+  background: #f7f7f7;
+  font-size: 14px;
+  color: #000;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  .topic-pic {
+    display: block;
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
 `;
 
 export const ListItem = styled.div`
@@ -82,7 +80,7 @@ export const ListInfo = styled.div`
 `;
 
 export const RecommendWrapper = styled.div`
-  margin: 30px 0;
+  margin: 26px 0;
   width: 280px;
 `;
 
@@ -91,15 +89,62 @@ export const RecommendItem = styled.div`
   height: 50px;
   background: url(${(props) => props.imgUrl});
   background-size: contain;
+  margin-bottom: 6px;
 `;
 
 export const WriterWrapper = styled.div`
   width: 278px;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  height: 300px;
-  line-height: 300px;
-  text-align: center;
+`;
+export const WriterTop = styled.div`
+  width: 278px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  color: #969696;
+  .title {
+    display: block;
+    float: left;
+  }
+  .shuxin {
+    display: block;
+    float: right;
+    .icon-shuaxin {
+      font-size: 14px;
+      margin-right: 2px;
+    }
+  }
+`;
+
+export const WriterItem = styled.div`
+  display: flex;
+  margin-bottom: 15px;
+  .avatar {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+  }
+  .box {
+    flex: 1;
+    .name {
+      padding-top: 5px;
+      font-size: 14px;
+    }
+    .info {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #969696;
+    }
+  }
+  .watch {
+    margin-top: 5px;
+    padding: 0;
+    font-size: 13px;
+    color: #42c02e;
+    .icon-hao {
+      font-size: 12px;
+    }
+  }
 `;
 
 export const LoadMore = styled.div`
