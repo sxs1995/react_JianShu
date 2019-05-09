@@ -77,6 +77,29 @@ export const ListInfo = styled.div`
     font-size: 13px;
     color: #999;
   }
+  .meta {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #b4b4b4;
+    .jsd-meta {
+      color: #ea6f5a;
+      margin-right: 10px;
+    }
+    .iconfont {
+      font-size: 12px;
+      margin-right: 3px;
+    }
+    .nickname,
+    .defalutColor {
+      margin-right: 10px;
+      cursor: pointer;
+      transition: all ease-in 0.2s;
+    }
+    .nickname:hover,
+    .defalutColor:hover {
+      color: #787878;
+    }
+  }
 `;
 
 export const RecommendWrapper = styled.div`

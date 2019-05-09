@@ -28,7 +28,6 @@ export const changePage = (page) => ({
 
 export const getList = () => {
   return (dispatch) => {
-    console.log(1111);
     axios
       .get("/api/headerList.json")
       .then((res) => {
